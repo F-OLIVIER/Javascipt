@@ -27,7 +27,7 @@ export function modalGame(option = 0) {
         scoreButton();
         StartButton();
     } else if (option == 1) { // Game over
-        gameMessage.innerHTML = "GAME OVER<br><br>Ce qui devait arriver arriva... La force obscure gagne en puissance et commence à envahir le monde réel. Le monde est perdu... Les étoiles dans le ciel de Boomville s'assombrissent, reflétant votre échec. Sparky vous encourage à ne pas abandonner et vous rappelle que chaque échec est une leçon pour devenir plus fort. Espérons qu'un miracle se produise, car même en s'attendant au pire personne n'y est jamais prêt...<br><br>Your score : " + score;
+        gameMessage.innerHTML = "GAME OVER<br><br>Ce qui devait arriver arriva... La force obscure gagne en puissance et commence à envahir le monde réel. Le monde est perdu... Les étoiles dans le ciel de Boomville s'assombrissent, reflétant votre échec. Sparky vous encourage à ne pas abandonner et vous rappelle que chaque échec est une leçon pour devenir plus fort. Espérons qu'un miracle se produise, car même en s'attendant au pire personne n'y est jamais prêt...<br><br>Votre score : " + score;
 
         if (lastScore < score) {
             tableScore()
@@ -40,7 +40,7 @@ export function modalGame(option = 0) {
             "Ce premier combat ne vous laisse pas indifférent... Vous découvrez ce que vous allez réellement devoir affronter. Bien qu'il n'y ait pas eu de grosse difficulté lors de ce premier combat, ce n'est pas le moment de se relacher... La bataille ne fais que commencer, en effet avec Sparky vous découvrez un secret inattendu : la porte de sortie a disparu ! Où est-elle ?",
             "Après avoir réussi à vaincre les membres de la garde. Cette victoire est un premier pas dans votre quête pour sauver la galaxie et le monde réel. Le fidèle serviteur de Galacto junior (petit frère du roi ultime Galacto) Bubbleman est ici, il est certain qu’il va vous barrer la route et rendre votre quête difficile.",
             "Ca y est, après avoir affronté les différents groupes d'élite de la garde Royale, vous pouvez enfin vous reposer et démarrer votre nouveau role d'héritier !<br><br>Soudain, une atmosphère pesante se fit sentir.<br>Que se passe-t-il ? Le sol tremble, Sparky crie ! Vous vous retrouvez dans l'obsurité totale.<br><br>Vous vous re-saissisez et vous rendez compte que vous êtes dans la salle du trône et réalisez que ce n'était pas fini, mais au contraire que le vrai combat allait commencer... Contre Galacto junior le frère du Roi.",
-            "FELICITATIONS, aidé par Sparky, vous avez affronté la force obscure dans une bataille épique. Vous avez réussit à vaincre tous les ennemis et gagné votre place au trone.<br>Sans prévenir, le Roi ultime Galacto apparaît devant vous vous félicitant pour votre courage et votre détermination. Il vous adoube et vous confère officiellement le titre d'Héritier de la Galaxie.<br>La petite ville de Boomville célèbre son héros avec un grand spectacle de feux d'artifice.<br><br>Your score : " + score
+            "FELICITATIONS, aidé par Sparky, vous avez affronté la force obscure dans une bataille épique. Vous avez réussit à vaincre tous les ennemis et gagné votre place au trone.<br>Sans prévenir, le Roi ultime Galacto apparaît devant vous vous félicitant pour votre courage et votre détermination. Il vous adoube et vous confère officiellement le titre d'Héritier de la Galaxie.<br>La petite ville de Boomville célèbre son héros avec un grand spectacle de feux d'artifice.<br><br>Votre score : " + score
         ];
         gameMessage.innerHTML = textehistory[levelCounter - 1];
 
@@ -297,7 +297,7 @@ function tableScore() {
     let divNameScore = document.getElementById("nameScore");
     divNameScore.classList.remove('display');
     const scoreMsg = document.getElementById('scoreMsg');
-    scoreMsg.innerHTML = 'NEW RECORD ! <br> Your score : ' + score;
+    scoreMsg.innerHTML = 'NOUVEAU RECORD !<br>Votre score : ' + score;
 
     // gestion du bouton de l'événement du score
     var buttonScore = document.getElementById("buttonScore");
