@@ -1,0 +1,12 @@
+***.vscode
+***node_modules
+***.env
+
+# fichier image
+site/public/images/unit
+
+# fichier build
+site/main
+
+# fichier database
+database/databaseGvG.db

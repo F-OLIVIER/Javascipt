@@ -1,0 +1,37 @@
+# lancement: docker compose up
+version: '3'
+
+services:
+  # Service pour le bot discord (Node.js)
+  bot:
+    build:
+      context: .
+      dockerfile: bot/Dockerfile.bot
+    working_dir: /bot
+    depends_on:
+      - database
+    links:
+      - database
+    ports:
+      - "3000:3000"
+
+  # Service pour le site internet (Go)
+  site:
+    build:
+      context: .
+      dockerfile: site/Dockerfile.site
+    working_dir: /site
+    depends_on:
+      - database
+    links:
+      - database
+    ports:
+      - "53134:53134"
+
+  # Service pour la base de données (SQLite)
+  database:
+    image: alpine:latest
+    volumes:
+      - ./database:/database
+    ports:
+      - "5432:5432"
