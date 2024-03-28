@@ -49,7 +49,7 @@ Pour demarrer le site internet
 go run ./cmd/main.go
 ```
 
-**Méthode dockerfile :**
+**Méthode dockerfile :** <br>
 Permet de demarrer dans un `container docker` le bot discord ainsi que le site internet
 ```sh
 docker compose up
