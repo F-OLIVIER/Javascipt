@@ -1,5 +1,6 @@
 import { Client, GatewayIntentBits, Partials } from 'discord.js';
 import { userInfo, classPlay } from './database.js';
+
 export const client = new
   Client({
     intents: [
@@ -21,11 +22,8 @@ export const client = new
 // ------------- Adaptation -------------
 // --------------------------------------
 
-var prefix = "!";
 // id du serveur
 export const ServerID = '674215425546125323'; // serveur de test
-// id du google doc officier
-// export const GspreadsheetID = '1ClUkP1TMVkKk0wd3z2pKMZlXOGQHB6oyqaI4hKGkfEc';
 // id des roles discord non autorisé (bot, etc.)
 export const DiscordUnauthorizedRole = ["1061582256214388738", "736881259560829009", "1070078308244521072"];
 // ligne 63 : List des admins
@@ -67,157 +65,22 @@ export function Booleanusermp(DiscordPlayerID) {
 export function MessageInsufficientAuthority(AuthorID, BotChan) {
   BotChan.send({
     content: "<@" + AuthorID + "> \n",
-    files: ["https://i.servimg.com/u/f43/15/76/70/95/admin10.png"]
+    files: ["https://i.servimg.com/u/f43/15/76/70/95/admin10.png"],
+    ephemeral: true,
   });
-}
-
-// Message chan utilisateur
-export function Messageinfo(AuthorID, BotChan) {
-  BotChan.send({
-    content: '<@' + AuthorID + '>, \n__**Français :**__ voici la liste des commandes utilisateur du bot \n__**English :**__ here is the list of bot user commands',
-    files: ["https://i.servimg.com/u/f43/15/76/70/95/info16.jpg"]
-  });
-}
-
-export function Messageinfoadmin(AuthorID, BotChan) {
-  BotChan.send({
-    content: "<@" + AuthorID + ">, \n",
-    files: ["https://i.servimg.com/u/f43/15/76/70/95/info_a10.jpg"]
-  });
-}
-
-export function MessageRaidPresent(AuthorID, BotChan) {
-  BotChan.send({
-    content: "<@" + AuthorID + "> \n",
-    files: ["https://i43.servimg.com/u/f43/15/76/70/95/presen10.png"]
-  });
-}
-
-export function MessageRaidRetard(AuthorID, BotChan) {
-  BotChan.send({
-    content: "<@" + AuthorID + "> \n",
-    files: ["https://i43.servimg.com/u/f43/15/76/70/95/retard10.png"]
-  });
-}
-
-export function MessageRaidAbsent(AuthorID, BotChan) {
-  BotChan.send({
-    content: "<@" + AuthorID + "> \n",
-    files: ["https://i.servimg.com/u/f43/15/76/70/95/absent10.png"]
-  });
-}
-
-export function Messagedesinscription(AuthorID, BotChan) {
-  BotChan.send({
-    content: "<@" + AuthorID + "> \n__**Français :**__ Vous êtes désinscrit de la prochaine GvG \n__**English :**__ You have been unsubscribed from the next GvG"
-  });
-}
-
-export function MessageRaidon(AuthorID, BotChan) {
-  BotChan.send({
-    content: "<@" + AuthorID + "> \n__**Français :**__ Les fonctions automatiques du bot sont __**activé**__\n__**English :**__  automatic bot functions are __**activated**__"
-  });
-}
-
-export function MessageRaidoff(AuthorID, BotChan) {
-  BotChan.send({
-    content: "<@" + AuthorID + "> \n__**Français :**__ les fonctions automatiques du bot sont __**désactivé**__\n__**English :**__  automatic bot functions are __**disabled**__"
-  });
-}
-
-export function Messagelvl(AuthorID, BotChan) {
-  BotChan.send({
-    content: "<@" + AuthorID + "> \n",
-    files: ["https://i43.servimg.com/u/f43/15/76/70/95/lvl10.jpg"]
-  });
-}
-
-export function Messagelvlok(AuthorID, BotChan, level) {
-  BotChan.send({
-    content: "<@" + AuthorID + "> \n__**Français :**__ votre level a été mis a jour ! Votre lvl est maintenant de : **" + level + "**\n__**English :**__ your level has been updated, it is now : **" + level + "**"
-  });
-}
-
-export function MessageInflu(AuthorID, BotChan) {
-  BotChan.send({
-    content: "<@" + AuthorID + "> \n",
-    files: ["https://i43.servimg.com/u/f43/15/76/70/95/influ11.jpg"]
-  });
-}
-
-export function Messageinfluok(AuthorID, BotChan, influ) {
-  BotChan.send({
-    content: "<@" + AuthorID + "> \n__**Français :**__ votre influence de héros (700 + armure) a été mis a jour ! Elle est maintenant de : **" + influ + "**\n__**English :**__ your hero influence (700 + armor) has been updated, it is now : **" + influ + "**"
-  });
-}
-
-export function Messageclass(AuthorID, BotChan) {
-  BotChan.send({
-    content: "<@" + AuthorID + "> \n__**Français :**__  voici la liste des codes classes.\nExemple d'utilisation : " + prefix + "class arc \n__**English :**__  here is the list of class codes.\nExample of use : " + prefix + "class nod\n",
-    files: ["https://i43.servimg.com/u/f43/15/76/70/95/code_c11.png"]
-  });
-}
-
-export function Messageclassok(AuthorID, BotChan, MemberGameCharacter) {
-  BotChan.send({
-    content: "<@" + AuthorID + "> \n__**Français :**__  la nouvelle classe de héros assigné est : **" + MemberGameCharacter + "**\n__**English :**__  the new assigned hero class is : **" + MemberGameCharacter + "**"
-  });
-}
-
-export function Messageclassfaux(AuthorID, BotChan) {
-  BotChan.send({
-    content: "<@" + AuthorID + "> \n__**Français :**__  mauvais format, ci-dessous la liste des codes classes.\nExemple d'utilisation : " + prefix + "class arc\n__**English :**__  wrong format, below is the list of class codes.\nExample of use : " + prefix + "class nod\n",
-    files: ["https://i43.servimg.com/u/f43/15/76/70/95/code_c11.png"]
-  });
-}
-
-export function MessageEndRaid(BotChan) {
-  BotChan.send({
-    content: group + "\n",
-    files: ["https://i43.servimg.com/u/f43/15/76/70/95/reset-10.png"]
-  });
-}
-
-export function Messagerappel(Botrappel, channel, idrole) {
-  Botrappel.send("<@&" + idrole + ">\n__**Français :**__\nOyez, Oyez brave chevalier !\nOn en a gros, trop de chevalier ont encore oublié de renseigner leurs présence dans le chan <#" + channel + "> (pour connaître les commandes du bot, utilise !info dans le chan) \n \n__**English :**__\nOyez, Oyez brave knight!\nToo many knights have forgotten to enter their names in the chan <#" + channel + "> (to know the bot commands, use !info in the channel)");
-}
-
-export function MessageResetDataRaid(AuthorID, BotChan) {
-  BotChan.send({
-    content: "<@" + AuthorID + "> \n",
-    files: ["https://i43.servimg.com/u/f43/15/76/70/95/reset-11.png"]
-  });
-}
-
-export function Messageclean(AuthorID, BotChan) {
-  BotChan.send("<@" + AuthorID + ">, \n__**Français :**__ Gdoc effacé \n__**English :**__ Gdoc clean");
 }
 
 // Message chan officier
 export function Messagegvg(AuthorID, BotChanOfficier, listnoninscrit) {
-  BotChanOfficier.send("<@" + AuthorID + "> \nJoueur n'ayant pas indiqué leurs présence pour la prochaine GvG :\n" + listnoninscrit);
-}
-
-export function MessageStat(AuthorID, BotChanOfficier) {
-  BotChanOfficier.send({
-    content: "<@" + AuthorID + "> \n",
-    files: ["https://i43.servimg.com/u/f43/15/76/70/95/statis10.png"]
-  });
+  BotChanOfficier.send("<@" + AuthorID + ">\nJoueur n'ayant pas indiqué leurs présence pour la prochaine GvG :\n" + listnoninscrit);
 }
 
 export function Messagenb(AuthorID, BotChanOfficier, nb_inscrit, nb_present, nb_retard, nb_absent) {
-  // BotChanOfficier.send("<@" + AuthorID + ">, voici les statistiques d'inscription pour la prochaine GvG : \n Nombre de joueur **inscrit** : " + nb_inscrit + " \n Nombre de joueur **present** : " + nb_present + "\n Nombre de joueur **en retard** : " + nb_retard + " \n Nombre de joueur **absent** : " + nb_absent);
-  BotChanOfficier.send("<@" + AuthorID + ">, voici les statistiques d'inscription pour la prochaine GvG : \n Nombre de joueur **inscrit** : " + nb_inscrit + " \n Nombre de joueur **present** : " + nb_present + "\n Nombre de joueur **absent** : " + nb_absent);
+  BotChanOfficier.send("<@" + AuthorID + ">\nVoici les statistiques d'inscription pour la prochaine GvG : \n Nombre de joueur **inscrit** : " + nb_inscrit + " \n Nombre de joueur **present** : " + nb_present + "\n Nombre de joueur **absent** : " + nb_absent);
 }
 
 export function Messagelist(AuthorID, BotChanOfficier, list_present, list_retard, list_absent) {
-  // BotChanOfficier.send("<@" + AuthorID + ">, voici les listes pour la prochaine GvG : \n\n__Liste des joueurs **presents**__ : \n" + list_present + "\n\n__Liste des joueurs **en retard**__ :\n" + list_retard + "\n\n__Liste des joueurs **absent**__ :\n" + list_absent);
-  BotChanOfficier.send("<@" + AuthorID + ">, voici les listes pour la prochaine GvG : \n\n__Liste des joueurs **presents**__ : \n" + list_present + "\n\n__Liste des joueurs **absent**__ :\n" + list_absent);
-}
-
-
-export function Messageraz(AuthorID, BotChanOfficier) {
-  BotChanOfficier.send("<@" + AuthorID + ">, \n__**Français :** remise à zeros des raids dans la BD effectué \n__**English :** reset of raids in the DB done");
+  BotChanOfficier.send("<@" + AuthorID + ">\nVoici les listes pour la prochaine GvG : \n\n__Liste des joueurs **presents**__ : \n" + list_present + "\n\n__Liste des joueurs **absent**__ :\n" + list_absent);
 }
 
 export function Messageprivatemp(AuthorID, BotChanOfficier, userpourmp) {
@@ -228,16 +91,8 @@ export function privatemp(privatemessage, changvg, utilisateurofficier) {
   privatemessage.send("Bonjour,\nCeci est message de rappel d'inscription à la prochaine GvG\nMerci de t'inscrire sur le bot GvG dans le chan <#" + changvg + ">. Si tu ne sais pas comment faire : écrit !info dans le chan.\nPour répondre a ce message, ne pas répondre directement mais contacter un officier : <@" + utilisateurofficier + "> par exemple.\nA bientôt et bon jeu");
 }
 
-export function MessageUserRemove(AuthorID, BotChanOfficier, iduserremove) {
-  BotChanOfficier.send("<@" + AuthorID + ">\nL'utilisateur n°" + iduserremove + " a bien été supprimer de la base de donnée");
-}
-
-export function MessageErreurRemove(AuthorID, BotChanOfficier) {
-  BotChanOfficier.send("<@" + AuthorID + ">\nL'utilisateur à supprimer de la base de donnée n'existe pas");
-}
-
 // Embled DATA
-export function EmbedGuide(BotChan) {
+export async function EmbedGuide() {
 
   let link1 = "[Le guide des guides / Guide to guides](https://conqblade.com/news/460)";
   let link2 = "[Bien commencer dans le jeu / Getting started in the game](https://conqblade.com/fr/news/538)";
@@ -281,13 +136,12 @@ export function EmbedGuide(BotChan) {
       icon_url: 'https://i43.servimg.com/u/f43/15/76/70/95/_guide10.png',
     },
   };
-  BotChan.send({
-    embeds: [EmbedGuide]
-  });
+
+  return EmbedGuide
 }
 
-export async function EmbedData(BotChan, message) {
-  let CurrentPlayer = await userInfo(message.author.id);
+export async function EmbedData(interaction) {
+  let CurrentPlayer = await userInfo(interaction.user.id);
   // console.log("CurrentPlayer : ", CurrentPlayer);
   let PPLPR = "Aucune donnée";
   let lvlhero = "Aucune donnée";
@@ -334,7 +188,7 @@ export async function EmbedData(BotChan, message) {
     title: "Joueur / Player : **__" + CurrentPlayer.DiscordName + "__**",
     color: 13373715,
     thumbnail: {
-      url: message.author.avatarURL()
+      url: interaction.user.avatarURL()
     },
     fields: [
       {
@@ -357,12 +211,11 @@ export async function EmbedData(BotChan, message) {
       {
         name: "Statistique GvG / TW stat",
         value: "GvG participé / TW participated : ***" + CurrentPlayer.NbGvGParticiped + "***" +
-        "\n Derniére gvg participé / Last participed GvG : ***" + CurrentPlayer.DateLastGvGParticiped + "***" +
+          "\n Derniére gvg participé / Last participed GvG : ***" + CurrentPlayer.DateLastGvGParticiped + "***" +
           "\n Presence : ***" + PP + "%***"
       }
     ]
   };
-  BotChan.send({
-    embeds: [DataEmbed]
-  });
+
+  return DataEmbed
 }

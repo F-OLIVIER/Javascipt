@@ -11,6 +11,8 @@ export function Resetsc() {
       console.error(error.message);
     }
   });
+
+  deleteListGvG(db);
   db.close();
 }
 
@@ -23,6 +25,8 @@ export function Resetraz() {
       console.error(error.message);
     }
   });
+
+  deleteListGvG(db);
   db.close();
 }
 
@@ -78,8 +82,20 @@ export function Resetac() {
   }).catch((error) => {
     console.error(error);
   });
+
+  deleteListGvG(db);
   db.close();
 }
+
+function deleteListGvG(db) {
+  const sql = "DELETE FROM GroupeGvG";
+  db.run(updateQuery, function (error) {
+    if (error) {
+      console.error(error.message);
+    }
+  });
+}
+
 
 export function MAJPresent(DiscordID) { // EtatInscription = 1
   const db = new sqlite3.Database('../database/databaseGvG.db');

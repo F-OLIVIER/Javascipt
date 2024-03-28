@@ -32,7 +32,7 @@ export function cronResetMsgReaction(BotReaction, TODOBotReaction, idrole) {
       // gestion de la date futur pour le message
       var now = moment();
       var day = now.day(); // 2 mardi, 6 samedi
-      console.log("day : " + day); 
+      // console.log("day : " + day); 
   
       // si mardi, annonce du samedi et si Samedi, annonce du mardi
       var futurdate;

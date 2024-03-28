@@ -1,11 +1,12 @@
 // Fichier annexe
-import { client, Messagenb, Messagelist, Messageclassok, Messageclass, Messageclassfaux } from './Constant.js';
+import { client, Messagenb, Messagelist } from './Constant.js';
 import { msgreactgvg } from './Reaction.js';
-import sqlite3 from 'sqlite3';
+import { listclass } from './database.js';
 
 // Module nodejs et npm
 import moment from 'moment-timezone';
 import { } from 'dotenv/config';
+import sqlite3 from 'sqlite3';
 
 // Commande nb
 export async function cmdnb(AuthorID, BotChanOfficier) {
@@ -31,7 +32,6 @@ export async function cmdnb(AuthorID, BotChanOfficier) {
       })
     );
 
-    console.log(responseCounts);
     const nb_inscrit = responseCounts[0] + responseCounts[1] + responseCounts[2];
     Messagenb(AuthorID, BotChanOfficier, nb_inscrit, responseCounts[0], responseCounts[1], responseCounts[2]);
   } catch (err) {
@@ -57,7 +57,6 @@ export async function cmdlist(AuthorID, BotChanOfficier) {
           if (err) {
             reject(err);
           } else {
-            console.log("row : ", rows)
             resolve(rows.map(row => row.DiscordID));
           }
         });
@@ -116,80 +115,18 @@ export async function cmdlist(AuthorID, BotChanOfficier) {
   Messagelist(AuthorID, BotChanOfficier, list_present, list_retard, list_absent);
 }
 
-// Command class
-export function cmdclass(AuthorID, ClassSaisie, BotChan) {
-  let MemberGameCharacter = "" // temp.GameCharacter;
-  let GameCharacter_ID = 0;
-
-  if (ClassSaisie == "arc" || ClassSaisie == "sar" || ClassSaisie == "ARC" || ClassSaisie == "SAR" || ClassSaisie == "Arccourt" || ClassSaisie == "Shortarch") {
-    MemberGameCharacter = "Arc court / Short arch";
-    GameCharacter_ID = 1;
-  }
-  else if (ClassSaisie == "acl" || ClassSaisie == "lar" || ClassSaisie == "ACL" || ClassSaisie == "LAR" || ClassSaisie == "Arclong" || ClassSaisie == "Longarc") {
-    MemberGameCharacter = "Arc long / Long arc";
-    GameCharacter_ID = 2;
-  }
-  else if (ClassSaisie == "lju" || ClassSaisie == "tbl" || ClassSaisie == "LJU" || ClassSaisie == "TBL" || ClassSaisie == "Lamesjumelles" || ClassSaisie == "Twinblades") {
-    MemberGameCharacter = "Lames jumelles / Twin blades";
-    GameCharacter_ID = 3;
-  }
-  else if (ClassSaisie == "ecb" || ClassSaisie == "écb" || ClassSaisie == "sss" || ClassSaisie == "ECB" || ClassSaisie == "SSS" || ClassSaisie == "épéecourte" || ClassSaisie == "Epeecourte" || ClassSaisie == "Shortsword") {
-    MemberGameCharacter = "épée courte & bouclier / Short sword & shield";
-    GameCharacter_ID = 4;
-  }
-  else if (ClassSaisie == "elb" || ClassSaisie == "élb" || ClassSaisie == "lss" || ClassSaisie == "ELB" || ClassSaisie == "LSS" || ClassSaisie == "épéelongue" || ClassSaisie == "epeelongue" || ClassSaisie == "Longsword") {
-    MemberGameCharacter = "épée longue & bouclier / Long sword & shield";
-    GameCharacter_ID = 5;
-  }
-  else if (ClassSaisie == "gua" || ClassSaisie == "guandao") {
-    MemberGameCharacter = "Guandao";
-    GameCharacter_ID = 6;
-  }
-  else if (ClassSaisie == "hda" || ClassSaisie == "wax" || ClassSaisie == "HDA" || ClassSaisie == "WAX" || ClassSaisie == "Hache" || ClassSaisie == "Weaponax") {
-    MemberGameCharacter = "Hache d'arme / Weapon ax";
-    GameCharacter_ID = 7;
-  }
-  else if (ClassSaisie == "lan" || ClassSaisie == "spe" || ClassSaisie == "LAN" || ClassSaisie == "SPE" || ClassSaisie == "Lance" || ClassSaisie == "spear") {
-    MemberGameCharacter = "Lance / spear";
-    GameCharacter_ID = 8;
-  }
-  else if (ClassSaisie == "mou" || ClassSaisie == "mus" || ClassSaisie == "MOU" || ClassSaisie == "MUS" || ClassSaisie == "Mousquet" || ClassSaisie == "Musket") {
-    MemberGameCharacter = "Mousquet / Musket";
-    GameCharacter_ID = 9;
-  }
-  else if (ClassSaisie == "nod" || ClassSaisie == "NOD" || ClassSaisie == "Nodashi") {
-    MemberGameCharacter = "Nodashi";
-    GameCharacter_ID = 10;
-  }
-  else if (ClassSaisie == "mas" || ClassSaisie == "MAS" || ClassSaisie == "Masse" || ClassSaisie == "Mass") {
-    MemberGameCharacter = "Masse de guerre / Mass of war";
-    GameCharacter_ID = 11;
-  }
-  else if (ClassSaisie == "dac" || ClassSaisie == "dàc" || ClassSaisie == "chb" || ClassSaisie == "DAC" || ClassSaisie == "CHB" || ClassSaisie == "Dague" || ClassSaisie == "dart") {
-    MemberGameCharacter = "Dague à chaine / Chain dart";
-    GameCharacter_ID = 12;
-  }
-  else if (ClassSaisie == "piq" || ClassSaisie == "pik" || ClassSaisie == "PIQ" || ClassSaisie == "PIK" || ClassSaisie == "Pique" || ClassSaisie == "Pike") {
-    MemberGameCharacter = "Pique / Pike";
-    GameCharacter_ID = 13;
-  }
-
-  if (GameCharacter_ID !== 0) {
-    const db = new sqlite3.Database('../database/databaseGvG.db');
-    const updateQuery = `UPDATE Users SET GameCharacter_ID = ? WHERE DiscordID = ?;`;
-    db.run(updateQuery, [GameCharacter_ID, AuthorID],
-      function (error) {
-        if (error) throw error;
-      }
+export async function cmdclass() {
+  const list = await listclass();
+  const options = [];
+  for (let i = 0; i < list.length; i++) {
+    options.push({
+      label: list[i].ClasseFR,
+      value: list[i].ID.toString(),
+    }
     );
-    db.close();
-
-    Messageclassok(AuthorID, BotChan, MemberGameCharacter);
-  } else if (ClassSaisie == "") {
-    Messageclass(AuthorID, BotChan);
-  } else {
-    Messageclassfaux(AuthorID, BotChan);
   }
+
+  return options
 }
 
 // command resetmsggvg

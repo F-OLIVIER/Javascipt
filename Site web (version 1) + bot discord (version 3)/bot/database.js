@@ -106,9 +106,64 @@ export async function unregisteredList() {
     return discordNamesList;
 }
 
+export async function isOfficier(AuthorID) {
+    const db = new sqlite3.Database('../database/databaseGvG.db');
+    const getcisOfficier = async () => {
+        return new Promise((resolve, reject) => {
+            const requestQuery = `SELECT DiscordRole FROM Users WHERE DiscordID = ?;`;
+            db.all(requestQuery, AuthorID, (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    };
+    const off = await getcisOfficier();
+    db.close();
+    if (off === "Officier") {
+        return true
+    }
+    return false
+}
+
 // ------------------------------------------------------------
 // --------------- mise à jour de l'utilisateur ---------------
 // ------------------------------------------------------------
+
+export async function listclass() {
+    const db = new sqlite3.Database('../database/databaseGvG.db');
+    const getlistclass = async () => {
+        return new Promise((resolve, reject) => {
+            const requestQuery = `SELECT ID, ClasseFR FROM ListGameCharacter;`;
+            db.all(requestQuery, [], (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    };
+
+    const list = await getlistclass();
+    db.close();
+    return list;
+}
+
+export function updateclass(AuthorID, GameCharacter_ID) {
+    const db = new sqlite3.Database('../database/databaseGvG.db');
+    const updateQuery = `UPDATE Users SET GameCharacter_ID = ? WHERE DiscordID = ?;`;
+    db.run(updateQuery, [GameCharacter_ID, AuthorID],
+      function (error) {
+        if (error) throw error;
+        return false
+      }
+    );
+    db.close();
+    return true
+}
 
 export function updateLvl(AuthorID, lvl) {
     const db = new sqlite3.Database('../database/databaseGvG.db');

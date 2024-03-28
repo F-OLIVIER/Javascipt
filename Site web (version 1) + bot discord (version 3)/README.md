@@ -8,11 +8,14 @@ Le projet se décompose en 2 partie, un bot discord et un site internet, les 2 a
 Le bot discord permet de gérer de façon automatisée les inscriptions des joueurs pour le jeu [Conqueror's Blade](https://conqblade.com/fr). 
 Les informations d'inscription des joueurs sont enregistré dans la base de donnée SQL, les joueurs peuvent ainsi donner la plupart des informations nécessaires à la préparation des GvG directement via discord.
 
+Toutes les commandes utilisateur et officier sont intégré directement en `slash command` sur discord (ainsi que quelque commande administrateur).
+
 Voici un exemple des informations visible est modifiable par chaque utilisateur <br>
 ![Exemple d'information](./img/data.png)
 
 **Partie 2 : le site internet** <br>
-débloquée en jeu. Ils peuvent également mettre à jour les informations de leur héros pour ceux qui n'apprécient pas de le faire via discord.
+Seul les utilisateurs presents sur le discord associé peuvent se connecté au site internet. Les roles discord permettent de gérer automatiquement les accées provilégier ou non au site.
+Les utilisateurs peuvent indiqué la liste des unités qu'ils ont débloquée en jeu ainsi que le niveau des unités en question. Ils peuvent également mettre à jour les informations de leur héros pour ceux qui n'apprécient pas de le faire via discord.
 Les officiers de la guilde ont accès à plusieurs onglets dont ne dispose pas un simple utilisateur, ils peuvent créer les groupes GvG pour la prochaine guerre de territoire, ils peuvent administrer le bot (activé ou désactivé des fonctions automatiques, ajouter de nouvelles unités, etc.), Ils accèdent également à une page de statistique des informations contenu dans la base de donnée.
 
 Voici quelque exemple de page internet <br>
@@ -43,7 +46,6 @@ npm start
 ```
 Pour demarrer le site internet
 ```sh
-cd site
 go run ./cmd/main.go
 ```
 

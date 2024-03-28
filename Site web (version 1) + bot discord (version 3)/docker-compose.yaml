@@ -1,4 +1,4 @@
-# lancement: docker compose up
+# lancement: sudo docker compose up
 version: '3'
 
 services:
@@ -6,21 +6,21 @@ services:
   bot:
     build:
       context: .
-      dockerfile: bot/Dockerfile.bot
+      dockerfile: ./bot/Dockerfile.bot
     working_dir: /bot
     depends_on:
       - database
     links:
       - database
     ports:
-      - "3000:3000"
+      - "80:80"
 
   # Service pour le site internet (Go)
   site:
     build:
       context: .
-      dockerfile: site/Dockerfile.site
-    working_dir: /site
+      dockerfile: ./Dockerfile.site
+    working_dir: /
     depends_on:
       - database
     links:
