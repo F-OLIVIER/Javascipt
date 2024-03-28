@@ -50,6 +50,7 @@ go run ./cmd/main.go
 ```
 
 **Méthode dockerfile :**
+Permet de demarrer dans un `container docker` le bot discord ainsi que le site internet
 ```sh
 docker compose up
 ```
